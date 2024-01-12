@@ -1,0 +1,68 @@
+.dark-gray-background {
+    -fx-background-color: #46474A;
+}
+.gray-background {
+    -fx-background-color: #636566;
+}
+
+.transparent-background {
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-text-fill: white; /* Set text color to white */
+
+}
+
+.radius {
+    -fx-background-radius: 100px;
+}
+
+.light-gray-background {
+    -fx-background-color: #DADADA;
+}
+
+.incoming-bubble {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100px;
+}
+
+.outgoing-bubble {
+    -fx-background-color: #50C984;
+    -fx-background-radius: 100px;
+}
+
+.message-bubble {
+    -fx-padding: 20;
+    -fx-background-radius: 50;
+}
+
+/* Additional styling for messages from you */
+.message-bubble.from-me {
+    -fx-background-color: white;
+}
+
+/* Additional styling for messages from others */
+.message-bubble.from-others {
+    -fx-background-color: white;
+}
+
+.list-view{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.list-cell{
+    -fx-background-color: transparent;
+}
+
+.list-cell:selected{
+    -fx-background-color: #46474A;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-opacity: 0;
+    visibility: hidden;
+}
+
+.list-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+}
+
