@@ -43,6 +43,7 @@ dependencies {
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
   implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0-rc1'
+  implementation 'org.openjfx:javafx-controls:17.0.1'
 
   compileOnly 'org.projectlombok:lombok:1.18.30'
   annotationProcessor 'org.projectlombok:lombok:1.18.30'

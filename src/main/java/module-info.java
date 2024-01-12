@@ -10,6 +10,8 @@ module fhtw.chatroom_client {
     exports fhtw.chatroom_client;
     exports fhtw.chatroom_client.controller;
     exports fhtw.chatroom_client.user;
-    exports fhtw.chatroom_client.socketMessage;
+    exports fhtw.chatroom_client.chat;
+    exports fhtw.chatroom_client.cells;
+    exports fhtw.chatroom_client.message;
     opens fhtw.chatroom_client.controller to javafx.fxml;
 }
