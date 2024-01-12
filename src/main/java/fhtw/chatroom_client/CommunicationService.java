@@ -15,7 +15,7 @@ public class CommunicationService implements Serializable {
 
         String response;
         try {
-            SocketMessage<User> socketMessage = new SocketMessage<>("register", new User(username, password, gender));
+            SocketMessage socketMessage = new SocketMessage<>("register", new User(username, password, gender));
             String json = socketMessage.toJson();
             out.writeObject(json);
             response = (String)in.readObject();

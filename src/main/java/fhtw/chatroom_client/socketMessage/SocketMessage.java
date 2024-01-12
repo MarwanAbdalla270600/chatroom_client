@@ -7,13 +7,13 @@ import lombok.Getter;
 
 @Getter
 public class SocketMessage<T> {
-    private final String method;
+    private String method;
 
-    private final T Object;
+    private Object object;
 
-    public SocketMessage(String method, T object) {
+    public SocketMessage(String method, Object object) {
         this.method = method;
-        Object = object;
+        this.object = object;
     }
 
     public SocketMessage fromJson(String json) throws JsonProcessingException {
