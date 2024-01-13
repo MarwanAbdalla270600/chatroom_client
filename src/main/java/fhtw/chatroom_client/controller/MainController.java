@@ -6,6 +6,7 @@ import fhtw.chatroom_client.cells.MessageListCell;
 import fhtw.chatroom_client.chat.PrivateChat;
 import fhtw.chatroom_client.message.PrivateChatMessage;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -80,7 +81,7 @@ public class MainController {
     @FXML
     public void addFriend() throws IOException, ClassNotFoundException {
         CommunicationService.initData();
-      /*  Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         String friend = friendField.getText();
         friendField.clear();
         if(CommunicationService.addFriend(friend)) {
@@ -89,7 +90,7 @@ public class MainController {
             infoAlert.setContentText("friend not found");
         }
         // Show the alert
-        infoAlert.show();*/
+        infoAlert.show();
     }
 
 }
