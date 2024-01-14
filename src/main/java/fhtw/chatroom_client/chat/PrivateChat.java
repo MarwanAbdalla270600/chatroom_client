@@ -25,6 +25,7 @@ public class PrivateChat implements Serializable {
     private String firstMember;
     private String secondMember;
     private List<PrivateChatMessage> chatMessages;
+    private boolean isOnline;
 
 
     public PrivateChat() {
@@ -39,14 +40,6 @@ public class PrivateChat implements Serializable {
         } else {
             return this.secondMember;
         }
-    }
-
-
-
-
-
-    public void setChatMessages(List<PrivateChatMessage> chatMessages) {
-        this.chatMessages = chatMessages;
     }
 
     public void addMessage(PrivateChatMessage privateChatMessage) {

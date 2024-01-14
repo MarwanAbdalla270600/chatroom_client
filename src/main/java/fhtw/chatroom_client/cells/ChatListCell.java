@@ -11,22 +11,19 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import lombok.Getter;
 
 
 @Getter
+
 public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<PrivateChat>> {
 
-    @FXML
-    private Label username;
-
-
+    // ...
 
     public ListCell<PrivateChat> call(ListView<PrivateChat> param) {
         return new ListCell<PrivateChat>() {
@@ -73,7 +70,26 @@ public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<Pr
                     // Add labels to the VBox
                     labelVBox.getChildren().addAll(nameLabel);
 
-                    hbox.getChildren().addAll(imagePane, labelVBox);
+                    // Create a red circle
+
+                    Color color;
+                    if(!privateChat.isOnline()) {
+                        color = Color.RED;
+                    } else {
+                        color = Color.GREEN;
+                    }
+                    Circle redCircle = new Circle(5, color);
+
+                    // Create a Region for horizontal spacing
+                    Region spacer = new Region();
+                    HBox.setHgrow(spacer, Priority.ALWAYS);
+
+                    // Adjust the vertical alignment of the circle
+                    VBox circleContainer = new VBox(redCircle);
+                    circleContainer.setAlignment(Pos.CENTER);
+
+                    // Add all elements to the HBox
+                    hbox.getChildren().addAll(imagePane, labelVBox, spacer, circleContainer);
                     //hbox.setBackground(new Background(new BackgroundFill(Color.BLUE,null,null)));
 
                     // Set the HBox as the graphic for the cell
