@@ -16,7 +16,7 @@ import java.util.List;
 public class User implements Serializable {
     private final String username;
     private final String password;
-    private final Character gender;
+    private Character gender;
     private boolean online = false;
     private List<PrivateChat> privateChats;
 
@@ -24,6 +24,10 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
         this.gender = gender;
+    }
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public User(String username, String password, Character gender, boolean isOnline) {

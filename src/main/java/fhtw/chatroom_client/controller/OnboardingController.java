@@ -60,6 +60,8 @@ public class OnboardingController {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("Register failed");
         }
+        registerUsername.clear();
+        registerPassword.clear();
         alert.show();
     }
 
@@ -68,8 +70,7 @@ public class OnboardingController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (CommunicationService.login(loginUsername.getText(), loginPassword.getText(), 'm')) {
             alert.setContentText("Login successfull");
-            MainApplication.profile = new Profile(loginUsername.getText(), loginPassword.getText(), 'm');
-            CommunicationService.initData();
+            MainApplication.profile = new Profile(loginUsername.getText(), loginPassword.getText());
             MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
             MainApplication.fiveSecondsWonder.play();
             Stage primaryStage = new Stage();
@@ -78,6 +79,8 @@ public class OnboardingController {
         } else {
             alert.setContentText("Login failed");
         }
+        loginUsername.clear();
+        loginPassword.clear();
         alert.show();
     }
 

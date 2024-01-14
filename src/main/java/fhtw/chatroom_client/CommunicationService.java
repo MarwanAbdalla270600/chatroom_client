@@ -39,18 +39,13 @@ public class CommunicationService implements Serializable {
             String json = "login;" + user.toJson();
             out.writeObject(json);
             response =  (boolean)in.readObject();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(response);
-        try {
-           // initData();
+            System.out.println(response);
         } catch (Exception e) {
-            System.out.println("Init Fehler");
+            throw new RuntimeException(e);
+            //ystem.out.println("fehler");
         }
-        return response;
+       //
+        return true;
     }
 
     public static void initData() throws IOException, ClassNotFoundException {

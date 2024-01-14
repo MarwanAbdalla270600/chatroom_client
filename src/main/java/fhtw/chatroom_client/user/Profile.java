@@ -19,11 +19,10 @@ public class Profile extends User {
     private ObservableList<PrivateChat> privateChats = FXCollections.observableArrayList();
 
 
-    public Profile(String username, String password, Character gender) {
-        super(username, password, gender);
+    public Profile(String username, String password) {
+        super(username, password);
         this.password = password;
         this.friendList = new HashSet<>();
-
     }
 
     public void addPrivateChat(PrivateChat chat) {
