@@ -3,7 +3,6 @@ package fhtw.chatroom_client.cells;
 
 import fhtw.chatroom_client.MainApplication;
 import fhtw.chatroom_client.chat.PrivateChat;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -26,7 +25,7 @@ public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<Pr
     // ...
 
     public ListCell<PrivateChat> call(ListView<PrivateChat> param) {
-        return new ListCell<PrivateChat>() {
+        return new ListCell<>() {
             public void updateItem(PrivateChat privateChat, boolean empty) {
                 super.updateItem(privateChat, empty);
                 if (empty) {
@@ -38,7 +37,7 @@ public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<Pr
                     hbox.getStyleClass().add("chatcell");
 
                     Image img;
-                    if (privateChat.getFriend().charAt(privateChat.getFriend().length()-1) == 'f') {
+                    if (privateChat.getFriend().charAt(privateChat.getFriend().length() - 1) == 'f') {
                         img = new Image(String.valueOf(MainApplication.class.getResource("assets/woman.png")));
                     } else {
                         img = new Image(String.valueOf(MainApplication.class.getResource("assets/man.png")));
@@ -73,7 +72,7 @@ public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<Pr
                     // Create a red circle
 
                     Color color;
-                    if(!privateChat.isOnline()) {
+                    if (!privateChat.isOnline()) {
                         color = Color.RED;
                     } else {
                         color = Color.GREEN;

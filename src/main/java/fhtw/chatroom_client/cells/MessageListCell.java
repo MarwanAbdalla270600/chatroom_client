@@ -1,10 +1,8 @@
 package fhtw.chatroom_client.cells;
 
 import fhtw.chatroom_client.message.PrivateChatMessage;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
@@ -15,12 +13,11 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
-import java.time.format.DateTimeFormatter;
 
 public class MessageListCell implements Callback<ListView<PrivateChatMessage>, ListCell<PrivateChatMessage>> {
 
     public ListCell<PrivateChatMessage> call(ListView<PrivateChatMessage> param) {
-        return new ListCell<PrivateChatMessage>() {
+        return new ListCell<>() {
             public void updateItem(PrivateChatMessage message, boolean empty) {
                 super.updateItem(message, empty);
                 if (empty) {

@@ -6,9 +6,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fhtw.chatroom_client.MainApplication;
 import fhtw.chatroom_client.message.PrivateChatMessage;
-import fhtw.chatroom_client.user.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -49,7 +46,8 @@ public class PrivateChat implements Serializable {
 
     public static List<PrivateChat> fromJsonToList(String json) throws JsonProcessingException {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(json, new TypeReference<List<PrivateChat>>() {});
+            return objectMapper.readValue(json, new TypeReference<>() {
+            });
         }
 
 

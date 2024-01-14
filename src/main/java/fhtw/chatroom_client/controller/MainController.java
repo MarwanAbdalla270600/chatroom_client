@@ -1,7 +1,6 @@
 package fhtw.chatroom_client.controller;
 
 import fhtw.chatroom_client.CommunicationService;
-import fhtw.chatroom_client.MainApplication;
 import fhtw.chatroom_client.cells.ChatListCell;
 import fhtw.chatroom_client.cells.MessageListCell;
 import fhtw.chatroom_client.chat.PrivateChat;

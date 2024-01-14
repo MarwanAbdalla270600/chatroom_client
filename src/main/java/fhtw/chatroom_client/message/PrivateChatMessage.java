@@ -4,8 +4,6 @@ package fhtw.chatroom_client.message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fhtw.chatroom_client.MainApplication;
-import fhtw.chatroom_client.chat.PrivateChat;
-import fhtw.chatroom_client.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
