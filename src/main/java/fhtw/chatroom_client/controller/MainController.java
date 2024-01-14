@@ -41,16 +41,8 @@ public class MainController {
         privateChatList.setItems(profile.getPrivateChats());
         privateChatList.getSelectionModel().selectFirst();
         activeChat = privateChatList.getSelectionModel().getSelectedItem();
-
-        //System.out.println(privateChatList.getSelectionModel().getSelectedIndex());
     }
 
-    public void loadData() {
-        privateChatList.setItems(profile.getPrivateChats());
-        System.out.println(privateChatList);
-        privateChatList.getSelectionModel().selectFirst();
-        activeChat = privateChatList.getSelectionModel().getSelectedItem();
-    }
 
     @FXML
     public void settings() {
@@ -88,8 +80,11 @@ public class MainController {
 
     @FXML
     public void addFriend() throws IOException, ClassNotFoundException {
-        CommunicationService.addFriend("Test");
-        loadData();
+        if (CommunicationService.addFriend(friendField.getText())) {
+            CommunicationService.initData();
+        }
+
+        //loadData();
         //CommunicationService.initData();
        /* Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         String friend = friendField.getText();

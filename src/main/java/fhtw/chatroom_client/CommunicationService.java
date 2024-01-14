@@ -80,9 +80,7 @@ public class CommunicationService implements Serializable {
 
     public static boolean addFriend(String username) throws IOException, ClassNotFoundException {
 
-            initData();
-
-      /*  boolean response;
+       boolean response;
         try {
             String json =  "addFriend;" + username;
             out.writeObject(json);
@@ -92,8 +90,8 @@ public class CommunicationService implements Serializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(response);*/
-        return true;
+        System.out.println(response);
+        return response;
     }
 
 

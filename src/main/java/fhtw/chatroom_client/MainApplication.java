@@ -4,12 +4,15 @@ import fhtw.chatroom_client.chat.PrivateChat;
 import fhtw.chatroom_client.message.PrivateChatMessage;
 import fhtw.chatroom_client.user.Profile;
 import fhtw.chatroom_client.user.User;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.Socket;
@@ -21,6 +24,14 @@ public class MainApplication extends Application {
     public static ObjectInputStream in;
 
     public static Profile profile;
+    public static Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        try {
+            CommunicationService.initData();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }));
+
 
 
     @Override
@@ -74,6 +85,8 @@ public class MainApplication extends Application {
             e.printStackTrace();
         }
 
+
+        /*pollingThread.start();*/
 
         launch();
     }
