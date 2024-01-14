@@ -46,6 +46,7 @@ public class OnboardingController {
         if (CommunicationService.login(loginUsername.getText(), loginPassword.getText(), 'm')) {
             alert.setContentText("Login successfull");
             MainApplication.profile = new Profile(loginUsername.getText(), loginPassword.getText(), 'm');
+            CommunicationService.initData();
             MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
             MainApplication.fiveSecondsWonder.play();
             Stage primaryStage = new Stage();

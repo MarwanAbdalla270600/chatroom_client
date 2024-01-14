@@ -18,6 +18,8 @@ import java.io.*;
 import java.net.Socket;
 
 public class MainApplication extends Application {
+    private static Stage primaryStage;  // Store the primary stage
+
     public static Socket socket;
     public static ObjectOutputStream out;
 
@@ -36,13 +38,12 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        initialize();
+        primaryStage = stage;  // Store the primary stage
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("onboarding.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 700, 500);
                 stage.setTitle("Onboarding");
-                stage.setTitle("onboarding");
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
@@ -52,6 +53,9 @@ public class MainApplication extends Application {
     }
 
     public static void openMainStage() throws IOException {
+        // Close the current stage
+        primaryStage.close();
+
         // Load the new FXML file
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Parent root = loader.load();
@@ -89,45 +93,5 @@ public class MainApplication extends Application {
         /*pollingThread.start();*/
 
         launch();
-    }
-
-
-    public static void initialize() {
-        /*User thomas = new User("thomas", "abcd123", 'm');
-        User manuel = new User("manuel", "abcd123", 'm');
-        User merkel = new User("merkel", "abcd123", 'f');
-        User anna = new User("anna","abcd123",  'f');
-        User frank = new User("frank", "abcd123", 'm');
-        User max = new User("maxine", "abcd123", 'f');
-        User moritz = new User("moritz", "abcd123", 'm');
-        User niko = new User("niko", "abcd123", 'm');
-        User favour = new User("nikolette","abcd123",  'f');*/
-
-        /*PrivateChat a = new PrivateChat(thomas);
-        PrivateChat b = new PrivateChat(manuel);
-        PrivateChat c = new PrivateChat(merkel);
-        PrivateChat d = new PrivateChat(anna);
-        PrivateChat e = new PrivateChat(frank);
-        PrivateChat f = new PrivateChat(max);
-        PrivateChat g = new PrivateChat(moritz);
-        PrivateChat h = new PrivateChat(niko);
-        PrivateChat i = new PrivateChat(favour);*/
-
-       /* a.addMessage(new PrivateChatMessage("hallo", false));
-        a.addMessage(new PrivateChatMessage("wie", false));
-        a.addMessage(new PrivateChatMessage("geht", false));
-        a.addMessage(new PrivateChatMessage("es", false));*/
-
-
-       /* profile.addPrivateChat(a);
-        profile.addPrivateChat(b);
-        profile.addPrivateChat(c);
-        profile.addPrivateChat(d);
-        profile.addPrivateChat(e);
-        profile.addPrivateChat(f);
-        profile.addPrivateChat(g);
-        profile.addPrivateChat(h);
-        profile.addPrivateChat(i);*/
-
     }
 }
