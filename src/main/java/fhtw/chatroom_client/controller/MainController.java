@@ -87,22 +87,17 @@ public class MainController {
 
     @FXML
     public void addFriend() throws IOException, ClassNotFoundException {
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         if (CommunicationService.addFriend(friendField.getText())) {
             CommunicationService.initData();
-        }
-
-        //loadData();
-        //CommunicationService.initData();
-       /* Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
-        String friend = friendField.getText();
-        friendField.clear();
-        if(CommunicationService.addFriend(friend)) {
             infoAlert.setContentText("added friend");
         } else {
-            infoAlert.setContentText("friend not found");
+            infoAlert.setAlertType(Alert.AlertType.ERROR);
+            infoAlert.setContentText("Could not find Friend");
         }
-        // Show the alert
-        infoAlert.show();*/
+
+        friendField.clear();
+        infoAlert.show();
     }
 
 }

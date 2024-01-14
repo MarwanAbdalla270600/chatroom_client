@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.chatroom_client.controller.MainController">
@@ -101,15 +100,6 @@
                             </font>
                             <HBox.margin>
                                 <Insets left="20.0" />
-                            </HBox.margin>
-                        </Label>
-                        <Circle fill="#50c984" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                        <Label prefHeight="35.0" prefWidth="63.0" text="Online" textFill="#9da7a7">
-                            <font>
-                                <Font name="Open Sans" size="14.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="10.0" />
                             </HBox.margin>
                         </Label>
                         <Pane prefHeight="92.0" prefWidth="269.0" HBox.hgrow="ALWAYS" />
