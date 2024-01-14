@@ -5,6 +5,7 @@ import fhtw.chatroom_client.cells.ChatListCell;
 import fhtw.chatroom_client.cells.MessageListCell;
 import fhtw.chatroom_client.chat.PrivateChat;
 import fhtw.chatroom_client.message.PrivateChatMessage;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -39,9 +40,16 @@ public class MainController {
         setCustomCells();
         privateChatList.setItems(profile.getPrivateChats());
         privateChatList.getSelectionModel().selectFirst();
-        activeChat =  privateChatList.getSelectionModel().getSelectedItem();
+        activeChat = privateChatList.getSelectionModel().getSelectedItem();
 
         //System.out.println(privateChatList.getSelectionModel().getSelectedIndex());
+    }
+
+    public void loadData() {
+        privateChatList.setItems(profile.getPrivateChats());
+        System.out.println(privateChatList);
+        privateChatList.getSelectionModel().selectFirst();
+        activeChat = privateChatList.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -58,9 +66,9 @@ public class MainController {
     public void clickChatList() {
         System.out.println("list clicked");
         try{
-            activeChatLabel.setText(privateChatList.getSelectionModel().getSelectedItem().getMember().getUsername());
+            activeChatLabel.setText(privateChatList.getSelectionModel().getSelectedItem().getFriend());
             activeChat = privateChatList.getSelectionModel().getSelectedItem();
-            privateChatMessageList.setItems(activeChat.getMessages());
+            privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
         } catch (Exception e) {
             System.out.println("list is empty");
         }
@@ -74,14 +82,16 @@ public class MainController {
         }
         CommunicationService.sendMessage();
         System.out.println(messageField.getText());
-        activeChat.addMessage(new PrivateChatMessage(messageField.getText(), true));
+        activeChat.addMessage(new PrivateChatMessage(messageField.getText()));
         messageField.clear();
     }
 
     @FXML
     public void addFriend() throws IOException, ClassNotFoundException {
-        CommunicationService.initData();
-        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        CommunicationService.addFriend("Test");
+        loadData();
+        //CommunicationService.initData();
+       /* Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         String friend = friendField.getText();
         friendField.clear();
         if(CommunicationService.addFriend(friend)) {
@@ -90,7 +100,7 @@ public class MainController {
             infoAlert.setContentText("friend not found");
         }
         // Show the alert
-        infoAlert.show();
+        infoAlert.show();*/
     }
 
 }

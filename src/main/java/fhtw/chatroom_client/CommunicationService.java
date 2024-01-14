@@ -1,12 +1,15 @@
 package fhtw.chatroom_client;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fhtw.chatroom_client.chat.Chat;
 import fhtw.chatroom_client.chat.PrivateChat;
+import fhtw.chatroom_client.controller.MainController;
+import fhtw.chatroom_client.message.PrivateChatMessage;
 import fhtw.chatroom_client.user.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +32,7 @@ public class CommunicationService implements Serializable {
         return response;
     }
 
-    public static boolean login(String username, String password, Character gender) {
+    public static boolean login(String username, String password, Character gender) throws IOException, ClassNotFoundException {
         boolean response;
         try {
             User user = new User(username, password, gender);
@@ -42,26 +45,44 @@ public class CommunicationService implements Serializable {
             throw new RuntimeException(e);
         }
         System.out.println(response);
+        try {
+           // initData();
+        } catch (Exception e) {
+            System.out.println("Init Fehler");
+        }
         return response;
     }
 
     public static void initData() throws IOException, ClassNotFoundException {
         try {
-            String json = "getChats;" + profile.toJson();  //brauchts den request ueberhaupt?
+            String json = "initData;";
             out.writeObject(json);
-            Set<PrivateChat> chats = (Set<PrivateChat>) in.readObject();
-            // TODO:
+            String response = (String) in.readObject();
+            System.out.println(response);
+            List<PrivateChat> privateChats = PrivateChat.fromJsonToList(response);
+            MainApplication.profile.setPrivateChats(privateChats);
+
+            System.out.println(privateChats);
+
+
+           // profile.setPrivateChats(observablePrivateChats);
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
+
+
+
 
     public static void sendMessage() {
         System.out.println("Send data to Server...");
     }
 
-    public static boolean addFriend(String username) throws IOException {
-        boolean response;
+    public static boolean addFriend(String username) throws IOException, ClassNotFoundException {
+
+            initData();
+
+      /*  boolean response;
         try {
             String json =  "addFriend;" + username;
             out.writeObject(json);
@@ -71,8 +92,8 @@ public class CommunicationService implements Serializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(response);
-        return response;
+        System.out.println(response);*/
+        return true;
     }
 
 
