@@ -66,3 +66,13 @@
     -fx-opacity: 0;
 }
 
+.gray-border{
+    -fx-border-color: #46474A;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: #46474A;
+}
+
+.light-gray-border{
+    -fx-border-color: #DADADA;
+    -fx-border-width: 0px 0px 2px 0px;
+}

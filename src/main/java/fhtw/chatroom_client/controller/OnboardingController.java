@@ -18,16 +18,21 @@ import java.io.IOException;
 public class OnboardingController {
 
     @FXML
-    public TextField username;
+    public TextField registerUsername;
 
     @FXML
-    public TextField password;
+    public TextField registerPassword;
+
+    @FXML
+    public TextField loginUsername;
+    @FXML
+    public TextField loginPassword;
 
 
     @FXML
     public void register() throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if (CommunicationService.register(username.getText(), password.getText(), 'm')) {
+        if (CommunicationService.register(registerUsername.getText(), registerPassword.getText(), 'm')) {
             alert.setContentText("Registrer successfull");
         } else {
             alert.setContentText("Register failed");
@@ -38,9 +43,9 @@ public class OnboardingController {
     @FXML
     public void login() throws IOException, ClassNotFoundException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if (CommunicationService.login(username.getText(), password.getText(), 'm')) {
+        if (CommunicationService.login(loginUsername.getText(), loginPassword.getText(), 'm')) {
             alert.setContentText("Login successfull");
-            MainApplication.profile = new Profile(username.getText(), password.getText(), 'm');
+            MainApplication.profile = new Profile(loginUsername.getText(), loginPassword.getText(), 'm');
             MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
             MainApplication.fiveSecondsWonder.play();
             Stage primaryStage = new Stage();
