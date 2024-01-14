@@ -29,7 +29,7 @@ public class MainApplication extends Application {
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("onboarding.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 700, 700);
+                Scene scene = new Scene(fxmlLoader.load(), 700, 500);
                 stage.setTitle("Onboarding");
                 stage.setTitle("onboarding");
                 stage.setScene(scene);

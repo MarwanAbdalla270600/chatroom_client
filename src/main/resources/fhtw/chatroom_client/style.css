@@ -19,6 +19,16 @@
     -fx-background-color: #DADADA;
 }
 
+.gray-border{
+    -fx-border-color: #46474A;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.light-gray-border{
+    -fx-border-color: #DADADA;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
 .incoming-bubble {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 100px;
