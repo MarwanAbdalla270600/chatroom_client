@@ -33,7 +33,8 @@ public class PrivateChat implements Serializable {
 
 
     public String getFriend() {
-        if (!this.firstMember.equals(MainApplication.profile.getUsername())) {
+        String firstMember = this.firstMember.substring(0, this.firstMember.length()-1);
+        if (!firstMember.equals(MainApplication.profile.getUsername())) {
             return this.firstMember;
         } else {
             return this.secondMember;

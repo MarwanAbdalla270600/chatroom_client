@@ -1,6 +1,7 @@
 package fhtw.chatroom_client.controller;
 
 import fhtw.chatroom_client.CommunicationService;
+import fhtw.chatroom_client.MainApplication;
 import fhtw.chatroom_client.cells.ChatListCell;
 import fhtw.chatroom_client.cells.MessageListCell;
 import fhtw.chatroom_client.chat.PrivateChat;
@@ -34,6 +35,9 @@ public class MainController {
 
     public PrivateChat activeChat;
 
+    @FXML
+    public Label loggedUser;
+
 
     @FXML
     public void initialize() {
@@ -41,6 +45,7 @@ public class MainController {
         privateChatList.setItems(profile.getPrivateChats());
         privateChatList.getSelectionModel().selectFirst();
         activeChat = privateChatList.getSelectionModel().getSelectedItem();
+        this.loggedUser.setText(profile.getUsername());
     }
 
 
@@ -58,7 +63,9 @@ public class MainController {
     public void clickChatList() {
         System.out.println("list clicked");
         try{
-            activeChatLabel.setText(privateChatList.getSelectionModel().getSelectedItem().getFriend());
+            String tmp = privateChatList.getSelectionModel().getSelectedItem().getFriend();
+            tmp = tmp.substring(0, tmp.length()-1);
+            activeChatLabel.setText(tmp);
             activeChat = privateChatList.getSelectionModel().getSelectedItem();
             privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
         } catch (Exception e) {

@@ -41,11 +41,11 @@ public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<Pr
                     hbox.getStyleClass().add("chatcell");
 
                     Image img;
-                    //if (privateChat.getFriend().getGender() == 'f' || privateChat.getMember().getGender() == 'F') {
+                    if (privateChat.getFriend().charAt(privateChat.getFriend().length()-1) == 'f') {
                         img = new Image(String.valueOf(MainApplication.class.getResource("assets/woman.png")));
-                    /*} else {
+                    } else {
                         img = new Image(String.valueOf(MainApplication.class.getResource("assets/man.png")));
-                    }*/
+                    }
 
                     // Create an ImageView
                     ImageView imageView = new ImageView(img);
@@ -61,7 +61,9 @@ public class ChatListCell implements Callback<ListView<PrivateChat>, ListCell<Pr
                     labelVBox.setAlignment(Pos.CENTER_RIGHT);
 
                     // Create labels
-                    Label nameLabel = new Label(privateChat.getFriend() );
+                    String tmp = privateChat.getFriend();
+                    tmp = tmp.substring(0, tmp.length() - 1);
+                    Label nameLabel = new Label(tmp);
                     nameLabel.setFont(Font.font("Open Sans Bold", 18.0));
                     nameLabel.setTextFill(Color.web("#ffffff"));
 

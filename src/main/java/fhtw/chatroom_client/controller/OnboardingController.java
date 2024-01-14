@@ -8,9 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,13 +26,38 @@ public class OnboardingController {
     @FXML
     public TextField loginPassword;
 
+    @FXML
+    public ToggleGroup gender;
+
+    public boolean validateRegister() {
+        Toggle selectedToggle = gender.getSelectedToggle();
+        String radio = ((ToggleButton) selectedToggle).getText();
+        return (radio != null && !registerUsername.getText().isEmpty() && !registerPassword.getText().isEmpty());
+    }
 
     @FXML
     public void register() throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if (CommunicationService.register(registerUsername.getText(), registerPassword.getText(), 'm')) {
+        try {
+            if (!validateRegister()) {
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setContentText("Data invalid\n Pls fill the form correctly");
+                alert.show();
+                return;
+            }
+        } catch (Exception e) {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("Data invalid\nPls fill the form correctly");
+            alert.show();
+            return;
+        }
+        Toggle selectedToggle = gender.getSelectedToggle();
+        Character gender = ((ToggleButton) selectedToggle).getText().equals("Female") ? 'f' : 'm';
+
+        if (CommunicationService.register(registerUsername.getText(), registerPassword.getText(), gender)) {
             alert.setContentText("Registrer successfull");
         } else {
+            alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("Register failed");
         }
         alert.show();
@@ -57,7 +80,6 @@ public class OnboardingController {
         }
         alert.show();
     }
-
 
 
 }

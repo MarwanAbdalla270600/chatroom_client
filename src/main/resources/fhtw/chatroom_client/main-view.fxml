@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.chatroom_client.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.chatroom_client.controller.MainController">
     <left>
         <HBox prefHeight="720.0" prefWidth="400.0" styleClass="gray-background" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
@@ -73,7 +73,16 @@
                             </styleClass>
                         </HBox>
                         <Pane prefHeight="2.0" prefWidth="200.0" styleClass="dark-gray-background" stylesheets="@style.css" />
-                        <ListView fx:id="privateChatList" cacheShape="false" fixedCellSize="80.0" onMouseClicked="#clickChatList" prefHeight="633.0" prefWidth="329.0" styleClass="gray-background" stylesheets="@style.css" />
+                        <ListView fx:id="privateChatList" cacheShape="false" fixedCellSize="80.0" onMouseClicked="#clickChatList" prefHeight="592.0" prefWidth="329.0" styleClass="gray-background" stylesheets="@style.css" />
+                  <HBox alignment="CENTER" prefHeight="58.0" prefWidth="329.0">
+                     <children>
+                        <Label fx:id="loggedUser" textFill="#dadada">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                     </children>
                     <opaqueInsets>
                         <Insets />
