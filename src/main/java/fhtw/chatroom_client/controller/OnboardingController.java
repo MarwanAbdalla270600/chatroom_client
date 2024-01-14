@@ -2,6 +2,8 @@ package fhtw.chatroom_client.controller;
 
 import fhtw.chatroom_client.CommunicationService;
 import fhtw.chatroom_client.MainApplication;
+import fhtw.chatroom_client.user.Profile;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,11 +36,13 @@ public class OnboardingController {
     }
 
     @FXML
-    public void login() throws IOException {
+    public void login() throws IOException, ClassNotFoundException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (CommunicationService.login(username.getText(), password.getText(), 'm')) {
             alert.setContentText("Login successfull");
-            //open new view
+            MainApplication.profile = new Profile(username.getText(), password.getText(), 'm');
+            MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+            MainApplication.fiveSecondsWonder.play();
             Stage primaryStage = new Stage();
 
             MainApplication.openMainStage();

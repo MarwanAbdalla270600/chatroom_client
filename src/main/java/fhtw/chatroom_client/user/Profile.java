@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class Profile extends User {
     //private List<FriendRequest> friendRequests;
 
 
-    public Profile(String username, Character gender, String password) {
+    public Profile(String username, String password, Character gender) {
         super(username, password, gender);
         this.password = password;
         this.friendList = new HashSet<>();
@@ -33,6 +34,11 @@ public class Profile extends User {
 
     public void addPrivateChat(PrivateChat chat) {
         privateChats.add(chat);
+    }
+
+    public void setPrivateChats(Collection<PrivateChat> privateChats) {
+        this.privateChats.clear();
+        this.privateChats.addAll(privateChats);
     }
 
 }

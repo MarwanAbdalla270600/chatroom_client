@@ -4,12 +4,15 @@ import fhtw.chatroom_client.chat.PrivateChat;
 import fhtw.chatroom_client.message.PrivateChatMessage;
 import fhtw.chatroom_client.user.Profile;
 import fhtw.chatroom_client.user.User;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.Socket;
@@ -20,7 +23,15 @@ public class MainApplication extends Application {
 
     public static ObjectInputStream in;
 
-    public static Profile profile = new Profile("marwan", 'm', "1234");
+    public static Profile profile;
+    public static Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        try {
+            CommunicationService.initData();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }));
+
 
 
     @Override
@@ -75,12 +86,14 @@ public class MainApplication extends Application {
         }
 
 
+        /*pollingThread.start();*/
+
         launch();
     }
 
 
     public static void initialize() {
-        User thomas = new User("thomas", "abcd123", 'm');
+        /*User thomas = new User("thomas", "abcd123", 'm');
         User manuel = new User("manuel", "abcd123", 'm');
         User merkel = new User("merkel", "abcd123", 'f');
         User anna = new User("anna","abcd123",  'f');
@@ -88,9 +101,9 @@ public class MainApplication extends Application {
         User max = new User("maxine", "abcd123", 'f');
         User moritz = new User("moritz", "abcd123", 'm');
         User niko = new User("niko", "abcd123", 'm');
-        User favour = new User("nikolette","abcd123",  'f');
+        User favour = new User("nikolette","abcd123",  'f');*/
 
-        PrivateChat a = new PrivateChat(thomas);
+        /*PrivateChat a = new PrivateChat(thomas);
         PrivateChat b = new PrivateChat(manuel);
         PrivateChat c = new PrivateChat(merkel);
         PrivateChat d = new PrivateChat(anna);
@@ -98,15 +111,15 @@ public class MainApplication extends Application {
         PrivateChat f = new PrivateChat(max);
         PrivateChat g = new PrivateChat(moritz);
         PrivateChat h = new PrivateChat(niko);
-        PrivateChat i = new PrivateChat(favour);
+        PrivateChat i = new PrivateChat(favour);*/
 
-        a.addMessage(new PrivateChatMessage("hallo", false));
+       /* a.addMessage(new PrivateChatMessage("hallo", false));
         a.addMessage(new PrivateChatMessage("wie", false));
         a.addMessage(new PrivateChatMessage("geht", false));
-        a.addMessage(new PrivateChatMessage("es", false));
+        a.addMessage(new PrivateChatMessage("es", false));*/
 
 
-        profile.addPrivateChat(a);
+       /* profile.addPrivateChat(a);
         profile.addPrivateChat(b);
         profile.addPrivateChat(c);
         profile.addPrivateChat(d);
@@ -114,7 +127,7 @@ public class MainApplication extends Application {
         profile.addPrivateChat(f);
         profile.addPrivateChat(g);
         profile.addPrivateChat(h);
-        profile.addPrivateChat(i);
+        profile.addPrivateChat(i);*/
 
     }
 }

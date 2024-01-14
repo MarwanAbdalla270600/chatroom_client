@@ -18,10 +18,6 @@ import javafx.util.Callback;
 import java.time.format.DateTimeFormatter;
 
 public class MessageListCell implements Callback<ListView<PrivateChatMessage>, ListCell<PrivateChatMessage>> {
-    @FXML
-    private Label messageData;
-    @FXML
-    private Label timestamp;
 
     public ListCell<PrivateChatMessage> call(ListView<PrivateChatMessage> param) {
         return new ListCell<PrivateChatMessage>() {
@@ -38,28 +34,19 @@ public class MessageListCell implements Callback<ListView<PrivateChatMessage>, L
                         messageContainer.setAlignment(Pos.CENTER_RIGHT);
                     }
 
-                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
-                    Text messageText = new Text(message.getData());
-                    Text timestampText = new Text(message.getTime().format(myFormatObj));
+                    Text messageText = new Text(message.getMessageText());
                     messageText.setFill(Color.web("#46474A"));
-                    timestampText.setFill(Color.web("#46474A"));
-
-                    // Center the text inside the message bubble
                     messageText.setTextAlignment(TextAlignment.CENTER);
-                    timestampText.setTextAlignment(TextAlignment.CENTER);
 
-                    // Style the message bubble based on byMe
                     Pane messageBubble = createMessageBubble(message.isFromMe());
                     messageBubble.setPadding(new Insets(20));
 
-                    // Create a VBox to arrange text and timestamp vertically
                     VBox messageContent = new VBox();
-                    messageContent.setAlignment(Pos.CENTER); // Center the content
-                    messageContent.getChildren().addAll(messageText, timestampText);
-
-                    // Set padding specifically for the right side to avoid overflow
+                    messageContent.setAlignment(Pos.CENTER);
                     messageContent.setPadding(new Insets(0, 20, 0, 0));
+
+                    // Add the text to the VBox
+                    messageContent.getChildren().add(messageText);
 
                     // Add the VBox to the message bubble
                     messageBubble.getChildren().add(messageContent);
@@ -78,7 +65,6 @@ public class MessageListCell implements Callback<ListView<PrivateChatMessage>, L
                 Pane messageBubble = new Pane();
                 messageBubble.getStyleClass().add("message-bubble");
 
-                // Add style class based on byMe
                 if (byMe) {
                     messageBubble.getStyleClass().add("from-me");
                 } else {
@@ -90,3 +76,4 @@ public class MessageListCell implements Callback<ListView<PrivateChatMessage>, L
         };
     }
 }
+
