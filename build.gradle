@@ -67,3 +67,8 @@ jlink {
 jlinkZip {
   group = 'distribution'
 }
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
