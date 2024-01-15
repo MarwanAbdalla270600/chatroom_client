@@ -72,7 +72,7 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         Thread socketThread = new Thread(() -> {
             try {
-                socket = new Socket("localhost", 12345);
+                socket = new Socket("localhost", 12346);
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
                 // Now you can read from 'in' or perform other socket-related operations
