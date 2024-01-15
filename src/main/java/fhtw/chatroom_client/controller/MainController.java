@@ -74,11 +74,11 @@ public class MainController {
     }
 
     @FXML
-    public void sendMessage() {
+    public void sendMessage() throws IOException {
         if(messageField.getText().isEmpty()) {
             return ;
         }
-        CommunicationService.sendMessage();
+        CommunicationService.sendMessage(messageField.getText(), activeChat);
         System.out.println(messageField.getText());
         activeChat.addMessage(new PrivateChatMessage(messageField.getText()));
         messageField.clear();

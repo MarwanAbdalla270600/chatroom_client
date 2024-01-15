@@ -1,7 +1,10 @@
 package fhtw.chatroom_client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fhtw.chatroom_client.chat.PrivateChat;
 
+import fhtw.chatroom_client.controller.MainController;
+import fhtw.chatroom_client.message.PrivateChatMessage;
 import fhtw.chatroom_client.user.User;
 
 
@@ -40,6 +43,16 @@ public class CommunicationService implements Serializable {
         return true;
     }
 
+    public static void sendMessage(String messageText, PrivateChat chat) throws IOException {
+        boolean response;
+
+        PrivateChatMessage newMessage = new PrivateChatMessage(profile.getUsername(), messageText, chat.getChatId());
+        String json = "sendMessage;" + newMessage.toJson();
+        System.out.println("THIS here: " + json);
+        out.writeObject(json);
+
+    }
+
     public static void initData() throws IOException, ClassNotFoundException {
         try {
             String json = "initData;";
@@ -58,12 +71,6 @@ public class CommunicationService implements Serializable {
         }
     }
 
-
-
-
-    public static void sendMessage() {
-        System.out.println("Send data to Server...");
-    }
 
     public static boolean addFriend(String username) {
 
