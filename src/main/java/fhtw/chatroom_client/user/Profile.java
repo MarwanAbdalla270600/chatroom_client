@@ -14,14 +14,12 @@ import java.util.Set;
 @Setter
 public class Profile extends User {
 
-    private String password;
     private Set<User> friendList;
     private ObservableList<PrivateChat> privateChats = FXCollections.observableArrayList();
 
 
     public Profile(String username, String password) {
         super(username, password);
-        this.password = password;
         this.friendList = new HashSet<>();
     }
 
