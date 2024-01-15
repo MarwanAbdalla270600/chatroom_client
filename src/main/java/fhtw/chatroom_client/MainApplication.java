@@ -18,6 +18,8 @@ import java.io.*;
 import java.net.Socket;
 
 public class MainApplication extends Application {
+
+    static String serverAddress = "localhost";
     private static Stage primaryStage;  // Store the primary stage
 
     public static Socket socket;
@@ -72,7 +74,7 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         Thread socketThread = new Thread(() -> {
             try {
-                socket = new Socket("localhost", 12345);
+                socket = new Socket(serverAddress, 12345);
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
                 // Now you can read from 'in' or perform other socket-related operations
