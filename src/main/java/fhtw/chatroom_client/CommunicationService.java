@@ -40,7 +40,7 @@ public class CommunicationService implements Serializable {
             throw new RuntimeException(e);
         }
        //
-        return true;
+        return response;
     }
 
     public static void sendMessage(String messageText, PrivateChat chat) throws IOException {
@@ -52,6 +52,7 @@ public class CommunicationService implements Serializable {
         out.writeObject(json);
 
     }
+
 
     public static void initData() throws IOException, ClassNotFoundException {
         try {
