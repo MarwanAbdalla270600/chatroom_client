@@ -30,31 +30,7 @@ public class Profile extends User {
 
 
     public void setPrivateChats(Collection<PrivateChat> privateChats) {
-        for (PrivateChat newChat : privateChats) {
-            // Check if the chat already exists in the list
-            boolean chatExists = false;
-            for (PrivateChat existingChat : this.privateChats) {
-                if (existingChat.getChatId() == newChat.getChatId()) {
-                    // Chat already exists, update its information
-                    existingChat.setFirstMember(newChat.getFirstMember());
-                    existingChat.setSecondMember(newChat.getSecondMember());
-                    existingChat.setOnline(newChat.isOnline());
-
-                    // Add new chat messages to the existing chat
-                    for (PrivateChatMessage newMessage : newChat.getChatMessages()) {
-                        if (!existingChat.getChatMessages().contains(newMessage)) {
-                            existingChat.getChatMessages().add(newMessage);
-                        }
-                    }
-                    chatExists = true;
-                    break;
-                }
-            }
-
-            // If the chat doesn't exist, add it to the list
-            if (!chatExists) {
-                this.privateChats.add(newChat);
-            }
-        }
+        this.privateChats.clear();
+        this.privateChats.addAll(privateChats);
     }
 }

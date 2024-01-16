@@ -28,7 +28,7 @@ public class MainApplication extends Application {
     public static ObjectInputStream in;
 
     public static Profile profile;
-    public static Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+    public static Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
         try {
             CommunicationService.initData();
         } catch (IOException | ClassNotFoundException e) {
