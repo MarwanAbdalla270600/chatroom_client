@@ -63,20 +63,26 @@ public class OnboardingController {
 
     @FXML
     public void login() throws IOException, ClassNotFoundException {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (CommunicationService.login(loginUsername.getText(), loginPassword.getText(), 'm')) {
             MainApplication.profile = new Profile(loginUsername.getText(), loginPassword.getText());
             MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
             MainApplication.fiveSecondsWonder.play();
             MainApplication.openMainStage();
+            // Only call initData if login is successful
             CommunicationService.initData();
         } else {
-            alert.setContentText("Login failed");
+            // If login is not successful, show the alert and do not proceed
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Login failed. Please check your username and password.");
             alert.show();
+            // Consider returning from the method here if there's nothing more to do
+            return;
         }
+        // Clear the username and password fields after an attempt
         loginUsername.clear();
         loginPassword.clear();
     }
+
 
 
 }

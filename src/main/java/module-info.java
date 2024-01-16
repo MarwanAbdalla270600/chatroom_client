@@ -4,6 +4,7 @@ module fhtw.chatroom_client {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires static lombok;
+    requires java.logging;
 
 
     opens fhtw.chatroom_client to javafx.fxml;

@@ -13,13 +13,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.util.logging.Logger;
 
 import java.io.*;
 import java.net.Socket;
 
 public class MainApplication extends Application {
+    private static final Logger logger = Logger.getLogger(MainApplication.class.getName());
 
-    static String serverAddress = "localhost";
+
+    static String serverAddress = "20.23.1.111";
     private static Stage primaryStage;  // Store the primary stage
 
     public static Socket socket;
@@ -74,12 +77,13 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         Thread socketThread = new Thread(() -> {
             try {
-                socket = new Socket(serverAddress, 12345);
+                socket = new Socket(serverAddress, 80);
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
                 // Now you can read from 'in' or perform other socket-related operations
 
             } catch (IOException e) {
+                logger.severe("Connection failed: " + e.getMessage());
                 e.printStackTrace(); // Handle the exception appropriately
             }
         });
