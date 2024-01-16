@@ -68,7 +68,7 @@ public class OnboardingController {
             MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
             MainApplication.fiveSecondsWonder.play();
             MainApplication.openMainStage();
-            // Only call initData if login is successful
+            // Only call initData if the login is successful
             CommunicationService.initData();
         } else {
             // If login is not successful, show the alert and do not proceed
