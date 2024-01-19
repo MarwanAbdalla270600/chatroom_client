@@ -22,7 +22,7 @@ public class MainApplication extends Application {
     private static final Logger logger = Logger.getLogger(MainApplication.class.getName());
 
 
-    static String serverAddress = "20.23.1.111";
+    static String serverAddress = "51.124.93.235";
     private static Stage primaryStage;  // Store the primary stage
 
     public static Socket socket;

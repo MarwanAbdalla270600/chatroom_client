@@ -9,6 +9,7 @@ import fhtw.chatroom_client.user.User;
 
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static fhtw.chatroom_client.MainApplication.*;
@@ -61,6 +62,11 @@ public class CommunicationService implements Serializable {
             String response = (String) in.readObject();
             System.out.println(response);
             List<PrivateChat> privateChats = PrivateChat.fromJsonToList(response);
+
+            if (privateChats == null) {
+                privateChats = new ArrayList<>(); // Initialize to empty list if null
+            }
+
             MainApplication.profile.setPrivateChats(privateChats);
 
             System.out.println(privateChats);
@@ -86,6 +92,4 @@ public class CommunicationService implements Serializable {
         System.out.println(response);
         return response;
     }
-
-
 }

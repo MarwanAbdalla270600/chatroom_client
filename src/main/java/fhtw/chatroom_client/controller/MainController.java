@@ -41,8 +41,10 @@ public class MainController {
     @FXML
     public void initialize() {
         setCustomCells();
-        privateChatList.setItems(profile.getPrivateChats());
-        privateChatList.getSelectionModel().selectFirst();
+        if (profile.getPrivateChats() != null) {
+            privateChatList.setItems(FXCollections.observableArrayList(profile.getPrivateChats()));
+            privateChatList.getSelectionModel().selectFirst();
+        }
         activeChat = privateChatList.getSelectionModel().getSelectedItem();
         this.loggedUser.setText(profile.getUsername());
     }
@@ -60,17 +62,21 @@ public class MainController {
 
     @FXML
     public void clickChatList() {
-        System.out.println("list clicked");
-        try{
-            String tmp = privateChatList.getSelectionModel().getSelectedItem().getFriend();
-            tmp = tmp.substring(0, tmp.length()-1);
-            activeChatLabel.setText(tmp);
-            activeChat = privateChatList.getSelectionModel().getSelectedItem();
-            privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
+        try {
+            PrivateChat selectedChat = privateChatList.getSelectionModel().getSelectedItem();
+            if (selectedChat != null) {
+                String tmp = selectedChat.getFriend();
+                tmp = tmp.substring(0, tmp.length() - 1);
+                activeChatLabel.setText(tmp);
+                activeChat = selectedChat;
+                privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
+            }
         } catch (Exception e) {
-            System.out.println("list is empty");
+            // Consider showing an alert or logging the error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error selecting chat.");
+            alert.show();
         }
-
     }
 
     @FXML
