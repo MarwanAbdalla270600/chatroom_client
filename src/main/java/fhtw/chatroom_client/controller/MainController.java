@@ -2,6 +2,7 @@ package fhtw.chatroom_client.controller;
 
 import fhtw.chatroom_client.CommunicationService;
 import fhtw.chatroom_client.cells.ChatListCell;
+import fhtw.chatroom_client.cells.ChatUpdateListener;
 import fhtw.chatroom_client.cells.MessageListCell;
 import fhtw.chatroom_client.chat.PrivateChat;
 import fhtw.chatroom_client.message.PrivateChatMessage;
@@ -13,10 +14,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.List;
 
 import static fhtw.chatroom_client.MainApplication.profile;
 
-public class MainController {
+public class MainController implements ChatUpdateListener {
     @FXML
     public TextField messageField;
 
@@ -47,8 +49,34 @@ public class MainController {
         }
         activeChat = privateChatList.getSelectionModel().getSelectedItem();
         this.loggedUser.setText(profile.getUsername());
+        CommunicationService.setChatUpdateListener(this);
     }
 
+    // Call this method when new chat data is received from the server.
+    public void updateChatList(List<PrivateChat> chats) {
+        // Use Platform.runLater() if this method is called from outside the JavaFX Application Thread.
+        javafx.application.Platform.runLater(() -> {
+            // Update the items of the privateChatList ListView.
+            privateChatList.setItems(FXCollections.observableArrayList(chats));
+
+            // Optionally, select the first chat if the list is not empty.
+            if (!chats.isEmpty()) {
+                privateChatList.getSelectionModel().selectFirst();
+                activeChat = privateChatList.getSelectionModel().getSelectedItem();
+                updateMessagesForActiveChat();
+            }
+        });
+    }
+    private void updateMessagesForActiveChat() {
+        if (activeChat != null) {
+            privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
+        }
+    }
+
+    @Override
+    public void onChatListUpdated(List<PrivateChat> chats) {
+        updateChatList(chats);
+    }
 
     @FXML
     public void settings() {
