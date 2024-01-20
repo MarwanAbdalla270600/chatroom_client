@@ -1,6 +1,7 @@
 package fhtw.chatroom_client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import fhtw.chatroom_client.cells.ChatUpdateListener;
 import fhtw.chatroom_client.chat.PrivateChat;
 
 import fhtw.chatroom_client.controller.MainController;
@@ -9,11 +10,17 @@ import fhtw.chatroom_client.user.User;
 
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static fhtw.chatroom_client.MainApplication.*;
 
 public class CommunicationService implements Serializable {
+    private static ChatUpdateListener chatUpdateListener;
+
+    public static void setChatUpdateListener(ChatUpdateListener listener) {
+        chatUpdateListener = listener;
+    }
     public static boolean register(String username, String password, Character gender) {
         boolean response;
         try {
@@ -63,6 +70,17 @@ public class CommunicationService implements Serializable {
             List<PrivateChat> privateChats = PrivateChat.fromJsonToList(response);
             MainApplication.profile.setPrivateChats(privateChats);
 
+            // Notify the listener
+            if (chatUpdateListener != null) {
+                chatUpdateListener.onChatListUpdated(privateChats);
+            }
+
+            if (privateChats == null) {
+                privateChats = new ArrayList<>(); // Initialize to empty list if null
+            }
+
+            MainApplication.profile.setPrivateChats(privateChats);
+
             System.out.println(privateChats);
 
 
@@ -86,6 +104,4 @@ public class CommunicationService implements Serializable {
         System.out.println(response);
         return response;
     }
-
-
 }
