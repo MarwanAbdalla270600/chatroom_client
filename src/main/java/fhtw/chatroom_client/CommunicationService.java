@@ -65,26 +65,24 @@ public class CommunicationService implements Serializable {
         try {
             String json = "initData;";
             out.writeObject(json);
-            String response = (String) in.readObject();
-            System.out.println(response);
-            List<PrivateChat> privateChats = PrivateChat.fromJsonToList(response);
-            MainApplication.profile.setPrivateChats(privateChats);
+            Object response = in.readObject(); // Read as Object
 
-            // Notify the listener
-            if (chatUpdateListener != null) {
-                chatUpdateListener.onChatListUpdated(privateChats);
+            if (response instanceof String) {
+                // Assuming response is a JSON string
+                System.out.println(response);
+                List<PrivateChat> privateChats = PrivateChat.fromJsonToList((String) response);
+                MainApplication.profile.setPrivateChats(privateChats);
+
+                // Notify the listener
+                if (chatUpdateListener != null) {
+                    chatUpdateListener.onChatListUpdated(privateChats);
+                }
+
+                System.out.println(privateChats);
+            } else {
+                // Handle unexpected response type
+                System.err.println("Unexpected response type: " + response);
             }
-
-            if (privateChats == null) {
-                privateChats = new ArrayList<>(); // Initialize to empty list if null
-            }
-
-            MainApplication.profile.setPrivateChats(privateChats);
-
-            System.out.println(privateChats);
-
-
-           // profile.setPrivateChats(observablePrivateChats);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

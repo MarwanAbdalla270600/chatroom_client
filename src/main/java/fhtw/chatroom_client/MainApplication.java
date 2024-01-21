@@ -74,7 +74,7 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         Thread socketThread = new Thread(() -> {
             try {
-                socket = new Socket(serverAddress, 12345);
+                socket = new Socket(serverAddress, 80);
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
                 // Now you can read from 'in' or perform other socket-related operations

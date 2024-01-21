@@ -59,7 +59,7 @@ public class MainController implements ChatUpdateListener {
 
     // Call this method when new chat data is received from the server.
     public void updateChatList(List<PrivateChat> chats) {
-        // Use Platform.runLater() if this method is called from outside the JavaFX Application Thread.
+       /* // Use Platform.runLater() if this method is called from outside the JavaFX Application Thread.
         javafx.application.Platform.runLater(() -> {
             // Update the items of the privateChatList ListView.
             privateChatList.setItems(FXCollections.observableArrayList(chats));
@@ -70,7 +70,18 @@ public class MainController implements ChatUpdateListener {
                 activeChat = privateChatList.getSelectionModel().getSelectedItem();
                 updateMessagesForActiveChat();
             }
-        });
+        });*/
+        PrivateChat currentSelection = privateChatList.getSelectionModel().getSelectedItem();
+        privateChatList.setItems(FXCollections.observableArrayList(chats));
+        if(currentSelection != null) {
+            // Attempt to reselect the previously selected chat
+            for (PrivateChat chat : chats) {
+                if (chat.getChatId() == currentSelection.getChatId()) {
+                    privateChatList.getSelectionModel().select(chat);
+                    break;
+                }
+            }
+        }
     }
     private void updateMessagesForActiveChat() {
         if (activeChat != null) {
@@ -115,12 +126,24 @@ public class MainController implements ChatUpdateListener {
     @FXML
     public void sendMessage() throws IOException {
         if(messageField.getText().isEmpty()) {
-            return ;
+            return;
         }
-        CommunicationService.sendMessage(messageField.getText(), activeChat);
-        System.out.println(messageField.getText());
-        activeChat.addMessage(new PrivateChatMessage(messageField.getText()));
+        final String messageText = messageField.getText();
+        PrivateChatMessage message = new PrivateChatMessage(profile.getUsername(), messageText, activeChat.getChatId());
+
+        // Assuming activeChat's chatMessages is an ObservableList
+        activeChat.getChatMessages().add(message); // Directly add the message to the chat
+
+        // Update UI immediately
+        javafx.application.Platform.runLater(() -> {
+            privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
+        });
+
+        // Send message to server
+        CommunicationService.sendMessage(messageText, activeChat);
+
         messageField.clear();
+
     }
 
     @FXML
