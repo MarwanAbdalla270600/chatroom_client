@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fhtw.chatroom_client.MainApplication;
 import fhtw.chatroom_client.message.PrivateChatMessage;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,11 +25,8 @@ public class PrivateChat implements Serializable {
     private List<PrivateChatMessage> chatMessages;
     private boolean isOnline;
 
-
     public PrivateChat() {
     }
-
-
 
     public String getFriend() {
         String firstMember = this.firstMember.substring(0, this.firstMember.length()-1);

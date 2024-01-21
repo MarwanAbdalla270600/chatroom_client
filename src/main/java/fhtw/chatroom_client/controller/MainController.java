@@ -5,12 +5,17 @@ import fhtw.chatroom_client.cells.ChatListCell;
 import fhtw.chatroom_client.cells.MessageListCell;
 import fhtw.chatroom_client.chat.PrivateChat;
 import fhtw.chatroom_client.message.PrivateChatMessage;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -45,8 +50,20 @@ public class MainController {
         privateChatList.getSelectionModel().selectFirst();
         activeChat = privateChatList.getSelectionModel().getSelectedItem();
         this.loggedUser.setText(profile.getUsername());
+        startPollingForMessages();
     }
 
+    private void startPollingForMessages() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            try {
+                CommunicationService.initData(); // Assuming this method fetches the latest chat data
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
 
     @FXML
     public void settings() {
@@ -75,12 +92,30 @@ public class MainController {
 
     @FXML
     public void sendMessage() throws IOException {
-        if(messageField.getText().isEmpty()) {
+        /*if(messageField.getText().isEmpty()) {
             return ;
         }
         CommunicationService.sendMessage(messageField.getText(), activeChat);
         System.out.println(messageField.getText());
         activeChat.addMessage(new PrivateChatMessage(messageField.getText()));
+        messageField.clear();*/
+        if(messageField.getText().isEmpty()) {
+            return;
+        }
+        final String messageText = messageField.getText();
+        PrivateChatMessage message = new PrivateChatMessage(profile.getUsername(), messageText, activeChat.getChatId());
+
+        // Assuming activeChat's chatMessages is an ObservableList
+        activeChat.getChatMessages().add(message); // Directly add the message to the chat
+
+        // Update UI immediately
+        javafx.application.Platform.runLater(() -> {
+            privateChatMessageList.setItems(FXCollections.observableArrayList(activeChat.getChatMessages()));
+        });
+
+        // Send message to server
+        CommunicationService.sendMessage(messageText, activeChat);
+
         messageField.clear();
     }
 
