@@ -94,7 +94,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="92.0" prefWidth="200.0">
                     <children>
-                        <Label fx:id="activeChatLabel" prefHeight="35.0" prefWidth="165.0" text="Mike" textFill="#9da7a7">
+                        <Label fx:id="activeChatLabel" prefHeight="35.0" prefWidth="165.0" textFill="#9da7a7">
                             <font>
                                 <Font name="Open Sans Bold" size="24.0" />
                             </font>

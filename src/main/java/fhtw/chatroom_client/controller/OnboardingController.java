@@ -65,8 +65,8 @@ public class OnboardingController {
     public void login() throws IOException, ClassNotFoundException {
         if (CommunicationService.login(loginUsername.getText(), loginPassword.getText(), 'm')) {
             MainApplication.profile = new Profile(loginUsername.getText(), loginPassword.getText());
-            MainApplication.fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-            MainApplication.fiveSecondsWonder.play();
+            MainApplication.receiveMessages.setCycleCount(Timeline.INDEFINITE);
+            MainApplication.receiveMessages.play();
             MainApplication.openMainStage();
             // Only call initData if the login is successful
             CommunicationService.initData();

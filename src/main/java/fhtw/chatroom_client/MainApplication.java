@@ -13,13 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.util.logging.Logger;
 
 import java.io.*;
 import java.net.Socket;
 
 public class MainApplication extends Application {
-    private static final Logger logger = Logger.getLogger(MainApplication.class.getName());
 
     static String serverAddress = "localhost";
     private static Stage primaryStage;  // Store the primary stage
@@ -30,7 +28,7 @@ public class MainApplication extends Application {
     public static ObjectInputStream in;
 
     public static Profile profile;
-    public static Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+    public static Timeline receiveMessages = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
         try {
             CommunicationService.initData();
         } catch (IOException | ClassNotFoundException e) {
@@ -76,13 +74,12 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         Thread socketThread = new Thread(() -> {
             try {
-                socket = new Socket(serverAddress, 80);
+                socket = new Socket(serverAddress, 12345);
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
                 // Now you can read from 'in' or perform other socket-related operations
 
             } catch (IOException e) {
-                logger.severe("Connection failed: " + e.getMessage());
                 e.printStackTrace(); // Handle the exception appropriately
             }
         });

@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,7 +50,11 @@ public class MainController implements ChatUpdateListener {
         }
         activeChat = privateChatList.getSelectionModel().getSelectedItem();
         this.loggedUser.setText(profile.getUsername());
+        privateChatMessageList.setSelectionModel(null);
+        privateChatMessageList.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
+
         CommunicationService.setChatUpdateListener(this);
+
     }
 
     // Call this method when new chat data is received from the server.

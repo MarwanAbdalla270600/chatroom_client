@@ -58,8 +58,8 @@ public class MessageListCell implements Callback<ListView<PrivateChatMessage>, L
                 }
             }
 
-            private Pane createMessageBubble(boolean byMe) {
-                Pane messageBubble = new Pane();
+            private HBox createMessageBubble(boolean byMe) {
+                HBox messageBubble = new HBox();
                 messageBubble.getStyleClass().add("message-bubble");
 
                 if (byMe) {
