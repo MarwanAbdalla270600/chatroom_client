@@ -60,7 +60,7 @@ public class MainController {
 
     @FXML
     public void clickChatList() {
-        System.out.println("list clicked");
+        //System.out.println("list clicked");
         try{
             String tmp = privateChatList.getSelectionModel().getSelectedItem().getFriend();
             tmp = tmp.substring(0, tmp.length()-1);

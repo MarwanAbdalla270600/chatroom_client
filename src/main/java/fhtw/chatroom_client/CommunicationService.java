@@ -24,7 +24,7 @@ public class CommunicationService implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(response);
+        //System.out.println(response);
         return response;
     }
 
@@ -39,16 +39,14 @@ public class CommunicationService implements Serializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-       //
+        //System.out.println(response);
         return response;
     }
 
     public static void sendMessage(String messageText, PrivateChat chat) throws IOException {
-        boolean response;
 
         PrivateChatMessage newMessage = new PrivateChatMessage(profile.getUsername(), messageText, chat.getChatId());
         String json = "sendMessage;" + newMessage.toJson();
-        System.out.println("THIS here: " + json);
         out.writeObject(json);
 
     }
@@ -59,14 +57,11 @@ public class CommunicationService implements Serializable {
             String json = "initData;";
             out.writeObject(json);
             String response = (String) in.readObject();
-            System.out.println(response);
+            //System.out.println(response); //for testing
             List<PrivateChat> privateChats = PrivateChat.fromJsonToList(response);
             MainApplication.profile.setPrivateChats(privateChats);
+            //System.out.println(privateChats);
 
-            System.out.println(privateChats);
-
-
-           // profile.setPrivateChats(observablePrivateChats);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
