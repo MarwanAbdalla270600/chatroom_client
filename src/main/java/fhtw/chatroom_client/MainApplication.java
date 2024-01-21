@@ -19,7 +19,7 @@ import java.net.Socket;
 
 public class MainApplication extends Application {
 
-    static String serverAddress = "localhost";
+    static String serverAddress = "20.4.188.34";
     private static Stage primaryStage;  // Store the primary stage
 
     public static Socket socket;
